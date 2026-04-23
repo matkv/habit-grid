@@ -43,6 +43,8 @@ export class HabitTrackerSettingsTab extends PluginSettingTab {
 				);
 		}
 
+		containerEl.createEl("hr");
+
 		let newHabitName = "";
 		new Setting(containerEl)
 			.setName("Add habit")
@@ -68,6 +70,22 @@ export class HabitTrackerSettingsTab extends PluginSettingTab {
 						await this.addHabit(newHabitName.trim());
 						newHabitName = "";
 						this.display();
+					})
+			);
+
+		containerEl.createEl("hr");
+
+		new Setting(containerEl)
+			.setName("Data file")
+			.setDesc("Open the JSON file where habit data is stored.")
+			.addButton((btn) =>
+				btn
+					.setButtonText("Open data.json")
+					.onClick(() => {
+						const adapter = this.app.vault.adapter as any;
+						const dataPath = `${adapter.basePath}/${this.app.vault.configDir}/plugins/habit-grid/data.json`;
+						const { shell } = require("electron");
+						shell.openPath(dataPath);
 					})
 			);
 	}
