@@ -56,7 +56,7 @@ export class HabitTrackerView extends ItemView {
 		const completedSet = new Set(habit.completedDates);
 		const dates = this.buildDateGrid();
 
-		for (let col = 0; col < 53; col++) {
+		for (let col = 0; col < 26; col++) {
 			for (let row = 0; row < 7; row++) {
 				const dateStr = dates[col][row];
 				const cell = gridContainer.createEl("div", { cls: "grid-cell" });
@@ -76,8 +76,8 @@ export class HabitTrackerView extends ItemView {
 		}
 	}
 
-	// Returns a 53×7 array of "YYYY-MM-DD" strings (or null for future/padding cells).
-	// col=0 is the oldest week, col=52 is the current week.
+	// Returns a 26×7 array of "YYYY-MM-DD" strings (or null for future/padding cells).
+	// col=0 is the oldest week, col=25 is the current week.
 	// row=0 is Monday, row=6 is Sunday.
 	private buildDateGrid(): (string | null)[][] {
 		const today = new Date();
@@ -89,12 +89,12 @@ export class HabitTrackerView extends ItemView {
 		const gridEndMonday = new Date(today);
 		gridEndMonday.setDate(today.getDate() - daysFromMonday);
 
-		// Grid start = 52 weeks before the current week's Monday
+		// Grid start = 25 weeks before the current week's Monday
 		const gridStartMonday = new Date(gridEndMonday);
-		gridStartMonday.setDate(gridEndMonday.getDate() - 52 * 7);
+		gridStartMonday.setDate(gridEndMonday.getDate() - 25 * 7);
 
 		const grid: (string | null)[][] = [];
-		for (let col = 0; col < 53; col++) {
+		for (let col = 0; col < 26; col++) {
 			grid[col] = [];
 			for (let row = 0; row < 7; row++) {
 				const d = new Date(gridStartMonday);
