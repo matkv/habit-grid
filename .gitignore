@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Plugin data (written by Obsidian at runtime)
+data.json
+
 # Build output
 main.js
 main.js.map
