@@ -1,0 +1,9 @@
+{
+	"id": "habit-grid",
+	"name": "Habit Grid",
+	"version": "0.1.0",
+	"minAppVersion": "1.4.0",
+	"description": "GitHub-style contribution grid habit tracker",
+	"author": "matko",
+	"isDesktopOnly": false
+}

@@ -1,0 +1,14 @@
+{
+  "habits": [
+    {
+      "id": "4ff6b98c-f2e0-4071-aecd-3981ca7bc68c",
+      "name": "Test habit",
+      "completedDates": []
+    },
+    {
+      "id": "b741078f-25bc-4fe9-9d0e-a580b0e0c53d",
+      "name": "Second habit",
+      "completedDates": []
+    }
+  ]
+}

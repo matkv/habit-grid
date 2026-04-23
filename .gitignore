@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output
+main.js
+main.js.map
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Other package manager lock files (we use npm, so package-lock.json is committed)
+yarn.lock
+pnpm-lock.yaml
