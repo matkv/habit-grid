@@ -1,5 +1,5 @@
 {
-  "name": "habit-tracker",
+  "name": "habit-grid",
   "version": "0.1.0",
   "description": "GitHub-style contribution grid habit tracker for Obsidian",
   "main": "main.js",
