@@ -31,7 +31,7 @@ export class HabitTrackerView extends ItemView {
 	}
 
 	render(): void {
-		const container = this.containerEl.children[1] as HTMLElement;
+		const container = this.contentEl;
 		container.empty();
 		container.addClass("habit-tracker-container");
 

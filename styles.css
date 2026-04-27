@@ -72,25 +72,28 @@
 	padding: 8px;
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 12px;
 	overflow-y: auto;
 }
 
+
 .habit-tracker-empty {
 	color: var(--text-muted);
-	font-size: var(--font-ui-smaller);
+	font-size: 0.85em;
+	padding: 0 4px;
 }
 
 .habit-section {
 	display: flex;
 	flex-direction: column;
-	gap: 3px;
+	gap: 4px;
 }
 
 .habit-name {
-	font-size: var(--font-ui-smaller);
-	font-weight: 600;
+	font-size: 0.9em;
+	font-weight: 500;
 	color: var(--text-normal);
+	padding: 0 4px;
 }
 
 .grid-container {
@@ -98,25 +101,30 @@
 	grid-template-columns: repeat(26, 1fr);
 	grid-template-rows: repeat(7, 1fr);
 	grid-auto-flow: column;
-	gap: 1px;
+	gap: 2px;
 	width: 100%;
 	aspect-ratio: 26 / 7;
 }
 
 .grid-cell {
-	border-radius: 1px;
-	background-color: var(--color-base-30);
+	border-radius: 2px;
+	background-color: var(--background-modifier-border);
 	cursor: pointer;
 	min-width: 0;
 	min-height: 0;
+	transition: background-color 0.1s ease-in;
 }
 
 .grid-cell:hover {
-	opacity: 0.7;
+	background-color: var(--interactive-hover);
 }
 
 .grid-cell.completed {
 	background-color: var(--interactive-accent);
+}
+
+.grid-cell.completed:hover {
+	background-color: var(--interactive-accent-hover);
 }
 
 .grid-cell-empty {

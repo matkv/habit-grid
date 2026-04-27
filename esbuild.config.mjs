@@ -1,8 +1,30 @@
 import esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
+import fs from "fs";
+import path from "path";
 
 const prod = process.argv[2] === "production";
+
+const obsidianPluginDir = path.join(
+	process.env.USERPROFILE || process.env.HOME,
+	"documents/Obsidian Vault/.obsidian/plugins/habit-grid"
+);
+
+const copyToObsidian = {
+	name: "copy-to-obsidian",
+	setup(build) {
+		build.onEnd(() => {
+			if (!fs.existsSync(obsidianPluginDir)) return;
+			for (const file of ["main.js", "styles.css", "manifest.json"]) {
+				if (fs.existsSync(file)) {
+					fs.copyFileSync(file, path.join(obsidianPluginDir, file));
+				}
+			}
+			console.log("Copied to Obsidian plugin folder");
+		});
+	},
+};
 
 const context = await esbuild.context({
 	entryPoints: ["src/main.ts"],
@@ -40,6 +62,7 @@ const context = await esbuild.context({
 	treeShaking: true,
 	outfile: "main.js",
 	minify: prod,
+	plugins: [copyToObsidian],
 });
 
 if (prod) {
