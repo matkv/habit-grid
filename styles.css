@@ -1,86 +1,17 @@
 
-      /* Obsidian/DataviewJS Github inspired yearcalendar by Richard Slettevoll - https://richard.sl/ */
-      .habit-tracker-view > *{
-        padding:0px;
-        margin:0px;
-        list-style: none;    
-      }
-      .habit-tracker-view{
-        font-size: 0.65em;
-        display: grid;
-        grid-template-columns: auto 1fr; 
-        grid-template-areas:
-          'year habits'
-          'weekdays boxes';
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
-          Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-          'Segoe UI Symbol';
-        width:100%;
-      }
-      .habit-tracker-habits {
-        display: grid;
-        text-align: center;
-        grid-template-columns: repeat(7, minmax(0, 1fr));
-        grid-area: habits;
-        margin-top: 0.1em;
-        margin-bottom: 0.3em;
-        grid-gap: 0.3em;
-      }
-      .habit-tracker-weekdays {
-        grid-area: weekdays;
-        margin-left: 0.1em;
-        margin-right: 0.3em;
-        white-space: nowrap; 
-      }
-      .habit-tracker-boxes {
-        grid-auto-flow: column;
-        grid-template-columns: repeat(7, minmax(0, 1fr));
-        grid-area: boxes;
-      }
-      .habit-tracker-weekdays,
-      .habit-tracker-boxes {
-        display: grid;
-        grid-gap: 0.3em;
-        grid-template-rows: repeat(7, minmax(0, 1fr));
-      }
-      .habit-tracker-year {
-        grid-area: year;
-        font-weight: bold;
-        font-size: 1.2em;
-      }
-      .habit-tracker-boxes li {
-        position: relative;
-        font-size: 0.75em;
-        background-color: #ebedf0;
-      }     
-      .habit-tracker-boxes li:not(.task-list-item)::before {
-        content: unset;
-      }
-      .habit-tracker-boxes .internal-link {
-        text-decoration: none;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-      }
-      .habit-tracker-boxes .today {
-        border: solid 1px rgb(61, 61, 61);
-      }
-
 /* Habit Grid plugin view */
 .habit-tracker-container {
-	padding: 8px;
+	padding: 6px 8px 12px;
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
 	overflow-y: auto;
 }
 
-
 .habit-tracker-empty {
 	color: var(--text-muted);
 	font-size: 0.85em;
-	padding: 0 4px;
+	padding: 4px 0;
 }
 
 .habit-section {
@@ -90,10 +21,33 @@
 }
 
 .habit-name {
-	font-size: 0.9em;
-	font-weight: 500;
-	color: var(--text-normal);
-	padding: 0 4px;
+	font-size: 0.8em;
+	font-weight: 600;
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.grid-wrapper {
+	display: grid;
+	grid-template-columns: 10px 1fr;
+	gap: 3px;
+	align-items: stretch;
+}
+
+.weekday-labels {
+	display: grid;
+	grid-template-rows: repeat(7, 1fr);
+	gap: 2px; /* must match .grid-container gap */
+	font-size: 0.6em;
+	color: var(--text-faint);
+}
+
+.weekday-label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
 }
 
 .grid-container {
@@ -107,16 +61,14 @@
 }
 
 .grid-cell {
-	border-radius: 2px;
 	background-color: var(--background-modifier-border);
+	border-radius: 2px;
 	cursor: pointer;
-	min-width: 0;
-	min-height: 0;
-	transition: background-color 0.1s ease-in;
+	transition: background-color 0.1s ease;
 }
 
 .grid-cell:hover {
-	background-color: var(--interactive-hover);
+	background-color: var(--background-modifier-border-hover);
 }
 
 .grid-cell.completed {
@@ -130,4 +82,9 @@
 .grid-cell-empty {
 	background: transparent;
 	pointer-events: none;
+}
+
+.grid-cell.today {
+	outline: 1.5px solid var(--interactive-accent);
+	outline-offset: -1px;
 }

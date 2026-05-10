@@ -52,9 +52,18 @@ export class HabitTrackerView extends ItemView {
 		const section = parent.createEl("div", { cls: "habit-section" });
 		section.createEl("div", { cls: "habit-name", text: habit.name });
 
-		const gridContainer = section.createEl("div", { cls: "grid-container" });
+		const gridWrapper = section.createEl("div", { cls: "grid-wrapper" });
+
+		const weekdays = ["M", "T", "W", "T", "F", "S", "S"];
+		const weekdayLabels = gridWrapper.createEl("div", { cls: "weekday-labels" });
+		for (const day of weekdays) {
+			weekdayLabels.createEl("div", { cls: "weekday-label", text: day });
+		}
+
+		const gridContainer = gridWrapper.createEl("div", { cls: "grid-container" });
 		const completedSet = new Set(habit.completedDates);
 		const dates = this.buildDateGrid();
+		const today = this.getTodayString();
 
 		for (let col = 0; col < 26; col++) {
 			for (let row = 0; row < 7; row++) {
@@ -66,6 +75,9 @@ export class HabitTrackerView extends ItemView {
 				} else {
 					if (completedSet.has(dateStr)) {
 						cell.addClass("completed");
+					}
+					if (dateStr === today) {
+						cell.addClass("today");
 					}
 					cell.setAttribute("title", dateStr);
 					cell.addEventListener("click", async () => {
@@ -111,6 +123,12 @@ export class HabitTrackerView extends ItemView {
 		const month = String(d.getMonth() + 1).padStart(2, "0");
 		const day = String(d.getDate()).padStart(2, "0");
 		return `${year}-${month}-${day}`;
+	}
+
+	private getTodayString(): string {
+		const today = new Date();
+		today.setHours(0, 0, 0, 0);
+		return this.formatDate(today);
 	}
 
 	private async toggleDate(habit: Habit, dateStr: string): Promise<void> {
