@@ -4,7 +4,7 @@
 	padding: 6px 8px 12px;
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: 20px;
 	overflow-y: auto;
 }
 
@@ -21,10 +21,10 @@
 }
 
 .habit-name {
-	font-size: 0.8em;
+	font-size: 0.85em;
 	font-weight: 600;
-	color: var(--text-muted);
-	letter-spacing: 0.05em;
+	color: var(--text-normal);
+	letter-spacing: 0.01em;
 }
 
 .grid-wrapper {
@@ -84,6 +84,9 @@
 }
 
 .grid-cell.today {
-	outline: 1.5px solid var(--interactive-accent);
-	outline-offset: -1px;
+	box-shadow: inset 0 0 0 1.5px var(--interactive-accent);
+}
+
+.grid-cell.today.completed {
+	box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.5);
 }
