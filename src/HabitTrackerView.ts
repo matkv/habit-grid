@@ -35,7 +35,9 @@ export class HabitTrackerView extends ItemView {
 		container.empty();
 		container.addClass("habit-tracker-container");
 
-		if (this.plugin.settings.habits.length === 0) {
+		const activeHabits = this.plugin.settings.habits.filter((h) => !h.archived);
+
+		if (activeHabits.length === 0) {
 			container.createEl("p", {
 				text: "No habits yet. Add one in Settings → Habit Tracker.",
 				cls: "habit-tracker-empty",
@@ -43,7 +45,7 @@ export class HabitTrackerView extends ItemView {
 			return;
 		}
 
-		for (const habit of this.plugin.settings.habits) {
+		for (const habit of activeHabits) {
 			this.renderHabit(container, habit);
 		}
 	}

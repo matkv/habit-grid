@@ -2,6 +2,7 @@ export interface Habit {
 	id: string;
 	name: string;
 	completedDates: string[]; // "YYYY-MM-DD" local time
+	archived?: boolean;
 }
 
 export interface PluginData {

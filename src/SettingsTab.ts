@@ -16,7 +16,10 @@ export class HabitTrackerSettingsTab extends PluginSettingTab {
 		containerEl.empty();
 		containerEl.createEl("h2", { text: "Habit Tracker" });
 
-		for (const habit of this.plugin.settings.habits) {
+		const activeHabits = this.plugin.settings.habits.filter((h) => !h.archived);
+		const archivedHabits = this.plugin.settings.habits.filter((h) => h.archived);
+
+		for (const habit of activeHabits) {
 			new Setting(containerEl)
 				.addText((text) =>
 					text
@@ -29,18 +32,46 @@ export class HabitTrackerSettingsTab extends PluginSettingTab {
 				)
 				.addButton((btn) =>
 					btn
-						.setButtonText("Delete")
-						.setWarning()
+						.setButtonText("Archive")
 						.onClick(async () => {
-							this.plugin.settings.habits =
-								this.plugin.settings.habits.filter(
-									(h) => h.id !== habit.id
-								);
+							habit.archived = true;
 							await this.plugin.saveSettings();
 							this.refreshView();
 							this.display();
 						})
 				);
+		}
+
+		if (archivedHabits.length > 0) {
+			containerEl.createEl("h3", { text: "Archived" });
+			for (const habit of archivedHabits) {
+				new Setting(containerEl)
+					.setName(habit.name)
+					.addButton((btn) =>
+						btn
+							.setButtonText("Restore")
+							.onClick(async () => {
+								habit.archived = false;
+								await this.plugin.saveSettings();
+								this.refreshView();
+								this.display();
+							})
+					)
+					.addButton((btn) =>
+						btn
+							.setButtonText("Delete")
+							.setWarning()
+							.onClick(async () => {
+								this.plugin.settings.habits =
+									this.plugin.settings.habits.filter(
+										(h) => h.id !== habit.id
+									);
+								await this.plugin.saveSettings();
+								this.refreshView();
+								this.display();
+							})
+					);
+			}
 		}
 
 		containerEl.createEl("hr");
